@@ -9,6 +9,8 @@ public class CompareSort
         int start = 1;
         int end = 10000;
         int[] randomArray = RandomizedArray(size, start, end);
+        // Gaps array with values for specified sorting gap.
+        // SHELL AND QUICK SORT AT BOTTOM
         int[] gaps = {0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095};
         
         long startTime = System.nanoTime();
@@ -136,7 +138,9 @@ public class CompareSort
     {
         if(low < high)
         {
+            // If the low index is less than the high index we partition. 
             int pivot = partition(arr, low, high);
+            // Recursively calling function to further partition. 
             QuickSort(arr, low, pivot);
             QuickSort(arr, pivot + 1, high);
         }
@@ -152,6 +156,7 @@ public class CompareSort
             {
                 if(i != j)
                 {
+                    // If loops find values less than the pivot and switch them. 
                     arr[i] ^= arr[j];
                     arr[j] ^= arr[i];
                     arr[i] ^= arr[j];
@@ -161,15 +166,18 @@ public class CompareSort
         arr[i] ^= arr[high];
         arr[high] ^= arr[i];
         arr[i] ^= arr[high];
+        // I is the new index of the pivot. 
         return i;
     }
     public static void ShellSort(int[] arr, int[] gaps)
     {
         for(int i = 0; i < gaps.length; i++)
         {
+            // Gap value set to current spot in gap array
             int gap = gaps[i];
             for(int j = 0; j < gap; j++)
             {
+                // Call upon InsertionGap function to sort subarray. 
                 InsertionSortGap(arr, j, gap);
             }
         }
@@ -181,9 +189,11 @@ public class CompareSort
         int current = i;
         while (current - gap >= 0 && arr[current] < arr[current - gap]) 
         {
+            // Moving elements in array to proper spots.
             int temp = arr[current];
             arr[current] = arr[current - gap];
             arr[current - gap] = temp;
+            // After swaps, current change and the array is checked and swapped again. 
             current = current - gap;
         }
     }
