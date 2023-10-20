@@ -154,18 +154,15 @@ public class CompareSort
         {
             if(arr[j] < pivot)
             {
-                if(i != j)
-                {
-                    // If loops find values less than the pivot and switch them. 
-                    arr[i] ^= arr[j];
-                    arr[j] ^= arr[i];
-                    arr[i] ^= arr[j];
-                }
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                i++;
             }
         }
-        arr[i] ^= arr[high];
-        arr[high] ^= arr[i];
-        arr[i] ^= arr[high];
+        int temp = arr[i];
+        arr[i] = arr[high];
+        arr[high] = temp;
         // I is the new index of the pivot. 
         return i;
     }
